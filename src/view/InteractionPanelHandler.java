@@ -1,7 +1,6 @@
 package view;
 
 import control.MainController;
-import javafx.scene.text.Text;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,55 +11,54 @@ public class InteractionPanelHandler {
     private MainController controller;
 
     private JPanel mainPanel;
-    private JButton zeigeNächsteKarteButton;
-    private JButton behalteButton;
-    private JButton wegwerfenButton;
+    private JButton nextCardButton;
+    private JButton keepButton;
+    private JButton throwButton;
     private JTextArea textArea1;
     private JTextPane textPane;
 
     public InteractionPanelHandler(MainController controller){
         this.controller = controller;
         createButtons();
-        //update();
     }
 
     public void createButtons(){
-        zeigeNächsteKarteButton.addActionListener(new ActionListener() {
+        nextCardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int next=controller.showNextCard();
                 if(next!=-1){
-                    addToSysoutput(""+next);
+                    addToSysOutput(""+next);
                 }else{
-                    addToSysoutput("Keine Karten mehr");
+                    addToSysOutput("Keine Karten mehr");
                     endGame();
                 }
             }
         });
-        behalteButton.addActionListener(new ActionListener() {
+        keepButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(controller.keep()) {
-                    addToSysoutput("Karte behalten");
+                    addToSysOutput("Karte behalten");
                     if(controller.cardStackEmpty()){
                         endGame();
                     }
                 } else {
-                    addToSysoutput("Keine Karte mehr vorhanden. Beende Spiel");
+                    addToSysOutput("Keine Karte mehr vorhanden. Beende Spiel");
                     endGame();
                 }
             }
         });
-        wegwerfenButton.addActionListener(new ActionListener() {
+        throwButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(controller.throwCard()) {
-                    addToSysoutput("Karte weggeworfen");
+                    addToSysOutput("Karte weggeworfen");
                     if(controller.cardStackEmpty()){
                         endGame();
                     }
                 } else {
-                    addToSysoutput("Keine Karte mehr vorhanden");
+                    addToSysOutput("Keine Karte mehr vorhanden");
                 }
             }
         });
@@ -69,9 +67,9 @@ public class InteractionPanelHandler {
     public void endGame(){
         int count=controller.inspect();
         if(count>=0){
-            addToSysoutput2("Du hast insgesamt "+count+" Karten behalten.");
+            addToSysOutput2("Du hast insgesamt "+count+" Karten behalten.");
         } else{
-            addToSysoutput2("Du hast keinen gültigen Stapel gebaut.");
+            addToSysOutput2("Du hast keinen gültigen Stapel gebaut.");
         }
     }
 
@@ -79,11 +77,11 @@ public class InteractionPanelHandler {
         return mainPanel;
     }
 
-    private void addToSysoutput(String text){
+    private void addToSysOutput(String text){
         textArea1.setText(text);
     }
 
-    private void addToSysoutput2(String text){
+    private void addToSysOutput2(String text){
         textPane.setText(text);
     }
 }
