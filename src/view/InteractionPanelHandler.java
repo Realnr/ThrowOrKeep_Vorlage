@@ -20,6 +20,7 @@ public class InteractionPanelHandler {
     public InteractionPanelHandler(MainController controller){
         this.controller = controller;
         createButtons();
+
     }
 
     public void createButtons(){

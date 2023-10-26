@@ -119,6 +119,9 @@ public class Stack<ContentType> {
      *         der Stack leer ist
      */
     public ContentType top() {
-        return head.getContent();
+        if(head!=null){
+            return head.getContent();
+        }
+       return null;
     }
 }

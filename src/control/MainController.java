@@ -68,7 +68,20 @@ public class MainController {
      * @return Die Anzahl der abgelegten Karten, falls stackKeep regelkonform ist, sonst -1.
      */
     public int inspect() {
-        //TODO 12: Implementiere die Methode gemäß des Kommentars
+        if(keepCorrect()){ //in keepCorrect wurde der Stapel umgedreht
+            //Anzahl der Karten
+            int kartenCount = 0;
+            Stack<Card> HELP = new Stack<>();
+            //wir pushen alle karten in HELP und können diesen Prozess zählen (jetzt ist der Stapel in richtiger reihenfolge)
+            while(!stackKeep.isEmpty()){
+                HELP.push(stackKeep.top());
+                stackKeep.pop();
+                kartenCount++;
+            }
+
+           stackKeep = HELP;
+            return kartenCount;
+        }
         return -1;
     }
 
